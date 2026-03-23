@@ -1,7 +1,9 @@
 #!/bin/bash
+
 # Captura el hash corto del commit actual
-REV=$(git rev-parse --short HEAD)
-# O si prefieres el tag: REV=$(git describe --tags)
+# REV=$(git rev-parse --short HEAD)
+# O si prefieres el tag: 
+REV=$(git describe --tags)
 
 echo "Compilando versión: $REV"
 

@@ -1,0 +1,44 @@
+name: Build and Release RA3 Converter
+
+on:
+  push:
+    tags:
+      - 'v*' # Se activa al subir un tag como v1.0.0
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-tk python3-pil.imagetk
+          python -m pip install --upgrade pip
+          pip install pyinstaller ttkbootstrap pandas openpyxl xlrd Pillow
+
+      - name: Build with PyInstaller
+        run: |
+          SHA_SHORT=$(git rev-parse --short HEAD)
+          pyinstaller --noconfirm --onefile --windowed \
+            --name "Convertidor_RA3_Linux_${{ github.ref_name }}_${SHA_SHORT}" \
+            --add-data "io_sead.py:." \
+            --collect-all ttkbootstrap \
+            --hidden-import pandas \
+            --hidden-import PIL._tkinter_finder \
+            --collect-submodules PIL \
+            "convertidor_RA3.py"
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/Convertidor_RA3_Linux_*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
