@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Activa entorno virtual
+source venv/bin/activate
+
 # Captura el hash corto del commit actual
 # REV=$(git rev-parse --short HEAD)
 # O si prefieres el tag: 
