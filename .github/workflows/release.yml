@@ -70,6 +70,7 @@ jobs:
         run: |
           $SHA_SHORT = (git rev-parse --short HEAD).Substring(0, 7)
           pyinstaller --noconfirm --onefile --windowed `
+            --icon="ra3.ico" `
             --name "Convertidor_RA3_Win_${{ github.ref_name }}_$SHA_SHORT" `
             --add-data "io_sead.py;." `
             --collect-all ttkbootstrap `

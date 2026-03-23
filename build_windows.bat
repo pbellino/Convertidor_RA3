@@ -20,6 +20,7 @@ set VERSION=v0.0.4
 :: 4. Ejecutar PyInstaller
 :: Nota: Usamos ';' para separar los datos en Windows
 pyinstaller --noconfirm --onefile --windowed ^
+    --icon="ra3.ico" ^
     --name "Convertidor_RA3_Win_%VERSION%_%SHA_SHORT%" ^
     --add-data "io_sead.py;." ^
     --collect-all ttkbootstrap ^
