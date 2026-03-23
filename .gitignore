@@ -1,0 +1,21 @@
+# --- Entornos Virtuales ---
+venv/
+env/
+.venv/
+
+# --- Compilación (PyInstaller) ---
+build/
+dist/
+*.spec
+
+# --- Python (Archivos temporales) ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Configuración Local y Datos ---
+config_ra3.json
+*.RA3
+*.csv
+*.xlsx
+
